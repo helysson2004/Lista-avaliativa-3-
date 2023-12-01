@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include <string.h>
+
+int obterValorRomano(char c) {
+    switch (c) {
+        case 'I': return 1;
+        case 'V': return 5;
+        case 'X': return 10;
+        case 'L': return 50;
+        case 'C': return 100;
+        case 'D': return 500;
+        case 'M': return 1000;
+        default: return 0;
+    }
+}
+
+
+int converterRomanoParaDecimal(char *numRomano) {
+    int resultado = 0;
+    int i;
+
+    for (i = 0; i < strlen(numRomano); i++) {
+        int valorAtual = obterValorRomano(numRomano[i]);
+        int valorProximo = (i < strlen(numRomano) - 1) ? obterValorRomano(numRomano[i + 1]) : 0;
+        
+        if (valorAtual < valorProximo) {
+            resultado -= valorAtual;
+        } else {
+            resultado += valorAtual;
+        }
+    }
+
+    return resultado;
+}
+
+
+void imprimirBinario(int decimal) {
+    printf(" na base 2: ");
+    int flag = 0;
+    for (int i = 11; i >= 0; i--) {
+        int bit = (decimal >> i) & 1;
+        if (bit == 1 || flag == 1) {
+            printf("%d", bit);
+            flag = 1;
+        }
+    }
+    if (flag == 0) {
+        printf("0");
+    }
+    printf("\n");
+}
+
+
+int main() {
+    char numeralRomano[13];
+    scanf("%s", numeralRomano);
+
+    int valorDecimal = converterRomanoParaDecimal(numeralRomano);
+
+    printf("%s", numeralRomano);
+    imprimirBinario(valorDecimal);
+
+    printf("%s na base 10: %d\n", numeralRomano, valorDecimal);
+
+    printf("%s na base 16: %x\n", numeralRomano, valorDecimal);
+
+    return 0;
+}
