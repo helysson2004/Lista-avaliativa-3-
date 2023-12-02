@@ -1,22 +1,69 @@
 #include <stdio.h>
-#include <math.h>
+#include <string.h>
+#include <ctype.h>
 
 int main() {
-    int numMeses;
-    double valorAporte, taxaJuros;
+    char license_plate[10];
+    char day_of_week[30];
 
-    scanf("%d", &numMeses);
-    scanf("%lf", &valorAporte);
-    
-  
-scanf("%lf", &taxaJuros);
+    scanf("%s", license_plate);
+    scanf("%s", day_of_week);
 
-    double montante = 0.0;
+    // for (int i = 0; i < strlen(day_of_week); i++) {
+    //     day_of_week[i] = toupper(day_of_week[i]);
+    // }
 
-    for (int mes = 1; mes <= numMeses; mes++) {
-        montante += valorAporte * pow((1 + taxaJuros), mes);
+    if ((strlen(license_plate) == 8 && license_plate[3] == '-' && isalpha(license_plate[0]) && isalpha(license_plate[1]) && isalpha(license_plate[2]) && isdigit(license_plate[4]) && isdigit(license_plate[5]) && isdigit(license_plate[6]) && isdigit(license_plate[7])) ||
+        (strlen(license_plate) == 7 && isalpha(license_plate[0]) && isalpha(license_plate[1]) && isalpha(license_plate[2]) && isdigit(license_plate[3]) && isalpha(license_plate[4]) && isdigit(license_plate[5]) && isdigit(license_plate[6]))) {
 
-        printf("Montante ao fim do mes %d: R$ %.2f\n", mes, montante);
+        char last_digit = license_plate[strlen(license_plate) - 1];
+
+        if (strcmp(day_of_week, "SEGUNDA-FEIRA") == 0) {
+            if (last_digit == '0' || last_digit == '1') {
+                printf("%s nao pode circular segunda-feira\n", license_plate);
+            } else {
+                printf("%s pode circular segunda-feira\n", license_plate);
+            }
+        } else if (strcmp(day_of_week, "TERCA-FEIRA") == 0) {
+            if (last_digit == '2' || last_digit == '3') {
+                printf("%s nao pode circular terca-feira\n", license_plate);
+            } else {
+                printf("%s pode circular terca-feira\n", license_plate);
+            }
+        } else if (strcmp(day_of_week, "QUARTA-FEIRA") == 0) {
+            if (last_digit == '4' || last_digit == '5') {
+                printf("%s nao pode circular quarta-feira\n", license_plate);
+            } else {
+                printf("%s pode circular quarta-feira\n", license_plate);
+            }
+        } else if (strcmp(day_of_week, "QUINTA-FEIRA") == 0) {
+            if (last_digit == '6' || last_digit == '7') {
+                printf("%s nao pode circular quinta-feira\n", license_plate);
+            } else {
+                printf("%s pode circular quinta-feira\n", license_plate);
+            }
+        } else if (strcmp(day_of_week, "SEXTA-FEIRA") == 0) {
+            if (last_digit == '8' || last_digit == '9') {
+                printf("%s nao pode circular sexta-feira\n", license_plate);
+            } else {
+                printf("%s pode circular sexta-feira\n", license_plate);
+            }
+        } else if (strcmp(day_of_week, "SABADO") == 0 || strcmp(day_of_week, "DOMINGO") == 0) {
+            printf("Nao ha proibicao no fim de semana\n");
+        } else {
+            printf("Dia da semana invalido\n");
+        }
+    } else {
+        printf("Placa invalida\n");
+        if (strcmp(day_of_week, "SEGUNDA-FEIRA") != 0 &&
+            strcmp(day_of_week, "TERCA-FEIRA") != 0 &&
+            strcmp(day_of_week, "QUARTA-FEIRA") != 0 &&
+            strcmp(day_of_week, "QUINTA-FEIRA") != 0 &&
+            strcmp(day_of_week, "SEXTA-FEIRA") != 0 &&
+            strcmp(day_of_week, "SABADO") != 0 &&
+            strcmp(day_of_week, "DOMINGO") != 0) {
+            printf("Dia da semana invalido\n");
+        }
     }
 
     return 0;
