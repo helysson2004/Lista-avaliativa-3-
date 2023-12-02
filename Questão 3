@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    int numMeses;
+    double valorAporte, taxaJuros;
+
+    scanf("%d", &numMeses);
+    scanf("%lf", &valorAporte);
+    
+  
+scanf("%lf", &taxaJuros);
+
+    double montante = 0.0;
+
+    for (int mes = 1; mes <= numMeses; mes++) {
+        montante += valorAporte * pow((1 + taxaJuros), mes);
+
+        printf("Montante ao fim do mes %d: R$ %.2f\n", mes, montante);
+    }
+
+    return 0;
+}
